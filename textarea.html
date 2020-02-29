@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="UTF-8">
+        <title>强哥照你</title>
+        <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.js"></script>
+    </head>
+
+    <body>
+        <div id="div1">
+            <textarea id="text" rows="40" cols="100"></textarea>
+            <span></span>
+        </div>
+        <div id="viewBox">
+            <!--这里是显示提示的区域-->
+        </div>
+        <script type="text/javascript">
+            LimitedNnumber("#text", "#viewBox", 5000)//调用函数需要传入三个参数，分别为，输入框、显示框、限制的长度（这里是9）
+
+            function LimitedNnumber(eventBox, viewBox, textLength) {//调用函数需要传入三个参数，分别为，输入框、显示框、限制的长度
+                $(document).on('input propertychange paste keyup', eventBox, function(event) {
+                    this.value = this.value.replace(this.value.slice(textLength), "")//超出长度的部分替换为空
+                    $(viewBox).html(this.value.length + "/" + textLength)
+                })
+            }
+        </script>
+    </body>
+
+</html>
